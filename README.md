@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proplan Klima — webové stránky
 
-## Getting Started
+Moderní firemní web pro **Proplan Klima** (projekce, klimatizace, vzduchotechnika,
+tepelná čerpadla). Postavený v **Next.js 16 (App Router) + Tailwind CSS 4 + TypeScript**.
 
-First, run the development server:
+## Vývoj
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikace běží na <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Struktura
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  layout.tsx          # globální layout + fonty + navbar/footer
+  page.tsx            # úvodní stránka
+  sluzby/             # přehled služeb
+  o-nas/              # o firmě
+  reference/          # vybrané realizace
+  kontakt/            # kontakty + formulář
+components/
+  Navbar.tsx, Footer.tsx, CTASection.tsx, ContactForm.tsx, ScrollReveal.tsx,
+  icons.tsx, services-data.tsx
+public/
+  logo.svg            # plné logo (text + dům)
+  logo-mark.svg       # samotná značka
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Logo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+V `public/` jsou aktuálně **vektorové verze loga**, vytvořené podle zaslaného
+obrázku, aby se na webu škálovaly ostře v každém rozlišení. Pokud máš
+originál v PNG/SVG, stačí přepsat soubory `public/logo.svg` a
+`public/logo-mark.svg`.
 
-## Deploy on Vercel
+## Obsah
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Texty (claim *„Originální řešení pro Vaši nemovitost.“*, sekce *O nás*,
+kontakty) jsou převzaté z aktuálního webu <http://www.proplan-klima.cz/>
+a rozšířené o detailní popisy služeb v duchu firmy. Kontakty:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **info@proplan-klima.cz**
+- **+420 737 830 599**
+- Trávnická 787, Hranice I-Město, 753 01
+
+## Formulář
+
+`ContactForm.tsx` je připraven pro připojení k backendu / e-mail službě
+(Resend, Formspree, vlastní API route). Nyní simuluje odeslání.
+
+## Design
+
+- Barevná paleta odvozená přímo z loga (hnědá / béžová / krémová).
+- Typografie: **Inter** (text) + **Cormorant Garamond** (display).
+- Plynulé scroll-reveal animace, sticky navbar s blur efektem, responsivní layout.

@@ -1,0 +1,95 @@
+import {
+  IconAC,
+  IconHeatPump,
+  IconVent,
+  IconDesign,
+  IconWrench,
+  IconShield,
+} from "./icons";
+
+export const services = [
+  {
+    slug: "projekce",
+    icon: IconDesign,
+    title: "Projekce & poradenství",
+    short: "Naše hlavní činnost — návrh na míru",
+    featured: true,
+    description:
+      "Projekce TZB je srdcem toho, co děláme. Od první konzultace, přes výpočty tepelných ztrát a zisků, až po kompletní projektovou dokumentaci ve všech stupních. Navrhujeme systémy, které dávají smysl technicky, ekonomicky i architektonicky — a v ruce dostanete podklad, podle kterého se dílo dá skutečně postavit.",
+    bullets: [
+      "Studie, DUR, DSP i DPS v plném rozsahu",
+      "Výpočet tepelných ztrát a zisků dle ČSN",
+      "Návrh klimatizace, VZT, vytápění i chlazení",
+      "Spolupráce s architekty a generálními projektanty",
+      "Energetická optimalizace a integrace s FVE",
+      "Nezávislé poradenství a oponentury cizích projektů",
+    ],
+  },
+  {
+    slug: "klimatizace",
+    icon: IconAC,
+    title: "Klimatizace",
+    short: "Tichý komfort po celý rok",
+    description:
+      "Návrh a instalace nástěnných, kazetových i kanálových klimatizací pro byty, rodinné domy i komerční prostory. Pracujeme s prvotřídními značkami a klademe důraz na estetiku, výkon a tichý chod.",
+    bullets: [
+      "Splitové i multisplitové systémy",
+      "Kazetové a kanálové jednotky",
+      "Chlazení i topení tepelným čerpadlem vzduch–vzduch",
+    ],
+  },
+  {
+    slug: "tepelna-cerpadla",
+    icon: IconHeatPump,
+    title: "Tepelná čerpadla",
+    short: "Úsporné vytápění nové generace",
+    description:
+      "Tepelná čerpadla vzduch–voda i země–voda pro novostavby i rekonstrukce. Pomůžeme s návrhem zdroje, otopné soustavy a vyřízením dotací Nová zelená úsporám.",
+    bullets: [
+      "Vzduch–voda, země–voda",
+      "Dotace Nová zelená úsporám",
+      "Integrace s FVE a akumulací",
+    ],
+  },
+  {
+    slug: "vzduchotechnika",
+    icon: IconVent,
+    title: "Vzduchotechnika & rekuperace",
+    short: "Čerstvý vzduch bez ztrát tepla",
+    description:
+      "Centrální i decentrální rekuperační jednotky pro zdravé vnitřní prostředí. Návrh, distribuce vzduchu, zaregulování i následný servis.",
+    bullets: [
+      "Centrální rekuperace s vysokou účinností",
+      "Distribuce vzduchu skrytá v konstrukcích",
+      "Tichý a energeticky úsporný provoz",
+    ],
+  },
+  {
+    slug: "realizace",
+    icon: IconWrench,
+    title: "Realizace na klíč",
+    short: "Od demolice po předání",
+    description:
+      "Provedeme vás celou stavbou — koordinujeme profese, hlídáme harmonogram a předáme dílo bez kompromisů. Pracujeme čistě a s respektem k interiéru.",
+    bullets: [
+      "Koordinace všech řemesel",
+      "Čisté řešení v interiéru",
+      "Předání bez vad a nedodělků",
+    ],
+  },
+  {
+    slug: "servis",
+    icon: IconShield,
+    title: "Servis & záruka",
+    short: "Postaráme se i po předání",
+    description:
+      "Pravidelný servis, čištění a kontroly chladiv. Reagujeme rychle a pružně — díky vlastnímu týmu nečekáte na třetí strany.",
+    bullets: [
+      "Pravidelné prohlídky a čištění",
+      "Kontroly těsnosti chladiv",
+      "Servis do 48 hodin",
+    ],
+  },
+];
+
+export type Service = (typeof services)[number];
