@@ -3,6 +3,7 @@ import Image from "next/image";
 import { services } from "@/components/services-data";
 import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
+import { asset } from "@/lib/paths";
 
 const HERO =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
@@ -83,7 +84,7 @@ export default function Home() {
               </div>
               <div className="absolute top-1/2 -left-8 -translate-y-1/2 hidden lg:flex items-center gap-3 bg-white rounded-full pl-3 pr-5 py-2 shadow-md border border-[var(--color-line)]">
                 <span className="w-9 h-9 rounded-full bg-brand-100 grid place-items-center">
-                  <Image src="/logo.png" alt="" width={1500} height={1000} className="h-6 w-auto" />
+                  <Image src={asset("/logo.png")} alt="" width={1500} height={1000} unoptimized className="h-6 w-auto" />
                 </span>
                 <span className="text-sm text-brand-900 font-medium">Certifikovaný partner</span>
               </div>

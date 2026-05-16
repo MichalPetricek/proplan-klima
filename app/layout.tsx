@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { asset } from "@/lib/paths";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/logo.png",
+    icon: asset("/logo.png"),
   },
 };
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
+import { asset } from "@/lib/paths";
 
 export const metadata = {
   title: "O nás",
@@ -50,7 +51,7 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-900/30 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-5 flex items-center gap-4">
-                <Image src="/logo.png" alt="Proplan Klima" width={1500} height={1000} className="h-10 w-auto" />
+                <Image src={asset("/logo.png")} alt="Proplan Klima" width={1500} height={1000} unoptimized className="h-10 w-auto" />
                 <p className="text-sm text-brand-900/80">
                   Projekce a&nbsp;realizace pro&nbsp;Vaši&nbsp;nemovitost.
                 </p>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/paths";
 
 const links = [
   { href: "/", label: "Úvod" },
@@ -38,11 +39,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center group" aria-label="Proplan Klima">
           <Image
-            src="/logo.png"
+            src={asset("/logo.png")}
             alt="Proplan Klima"
             width={1500}
             height={1000}
             priority
+            unoptimized
             className="h-12 w-auto"
           />
         </Link>

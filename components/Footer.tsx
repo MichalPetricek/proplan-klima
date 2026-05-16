@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { asset } from "@/lib/paths";
 
 export function Footer() {
   return (
@@ -8,10 +9,11 @@ export function Footer() {
         <div className="lg:col-span-2">
           <div className="flex items-center">
             <Image
-              src="/logo.png"
+              src={asset("/logo.png")}
               alt="Proplan Klima"
               width={1500}
               height={1000}
+              unoptimized
               className="h-16 w-auto"
             />
           </div>
