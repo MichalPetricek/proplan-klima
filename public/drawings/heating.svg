@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Výkres podlahového vytápění">
+  <defs>
+    <pattern id="gridH" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#d9cab6" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" fill="#f3ece2"/>
+  <rect width="1000" height="1000" fill="url(#gridH)"/>
+  <g fill="none" stroke="#3b2a1f" stroke-width="3">
+    <rect x="130" y="150" width="740" height="700"/>
+    <line x1="500" y1="150" x2="500" y2="850"/>
+  </g>
+  <!-- topný had podlahovky -->
+  <g fill="none" stroke="#8a6849" stroke-width="6" opacity="0.9">
+    <path d="M180 800 L180 220 Q180 200 200 200 L300 200 Q320 200 320 220 L320 760 Q320 780 340 780 L340 780 Q360 780 360 760 L360 240 Q360 220 380 220 L440 220 Q460 220 460 240 L460 800"/>
+    <path d="M560 800 L560 220 Q560 200 580 200 L680 200 Q700 200 700 220 L700 760 Q700 780 720 780 Q740 780 740 760 L740 240 Q740 220 760 220 L820 220 Q840 220 840 240 L840 800"/>
+  </g>
+  <!-- rozdělovač -->
+  <g fill="none" stroke="#1d4f91" stroke-width="3">
+    <rect x="470" y="820" width="60" height="40"/>
+    <line x1="485" y1="820" x2="485" y2="800"/>
+    <line x1="515" y1="820" x2="515" y2="800"/>
+  </g>
+  <g stroke="#1d4f91" stroke-width="2" fill="#1d4f91" font-family="Arial, sans-serif" font-size="22">
+    <line x1="130" y1="900" x2="870" y2="900"/>
+    <path d="M130 890 L130 910 M870 890 L870 910"/>
+    <text x="455" y="935">11 200</text>
+  </g>
+  <text x="160" y="200" font-family="Arial, sans-serif" font-size="26" fill="#3b2a1f" font-weight="700">PODLAHOVÉ VYTÁPĚNÍ</text>
+</svg>

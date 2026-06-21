@@ -4,7 +4,7 @@ import { IconMail, IconPhone, IconPin } from "@/components/icons";
 export const metadata = {
   title: "Kontakt",
   description:
-    "Kontaktujte Proplan Klima — Trávnická 787, Hranice I-Město, +420 737 830 599, info@proplan-klima.cz.",
+    "Kontaktujte Proplan Klima - Hranická 107, Hranice IV-Drahotuše, +420 737 830 599, info@proplan-klima.cz.",
 };
 
 export default function ContactPage() {
@@ -41,22 +41,21 @@ export default function ContactPage() {
             <ContactCard
               icon={<IconPin />}
               title="Adresa"
-              value={`Trávnická 787\nHranice I-Město, 753 01`}
+              value={`Hranická 107\n753 61 Hranice IV-Drahotuše`}
             />
 
-            <div className="card p-6">
+            <div className="card card-flat p-6">
               <p className="text-xs uppercase tracking-[0.16em] text-brand-700">Otevírací doba</p>
               <ul className="mt-3 space-y-1.5 text-brand-900/85 text-sm">
-                <li className="flex justify-between"><span>Po – Pá</span><span className="font-medium">8:00 – 17:00</span></li>
-                <li className="flex justify-between"><span>So</span><span className="font-medium">po domluvě</span></li>
-                <li className="flex justify-between text-brand-900/60"><span>Ne</span><span>zavřeno</span></li>
+                <li className="flex justify-between"><span>Po - Pá</span><span className="font-medium">7:00 - 15:30</span></li>
+                <li className="flex justify-between text-brand-900/60"><span>So - Ne</span><span>zavřeno</span></li>
               </ul>
             </div>
 
-            <div className="card overflow-hidden">
+            <div className="card card-flat overflow-hidden">
               <iframe
-                title="Proplan Klima — mapa"
-                src="https://www.google.com/maps?q=Tr%C3%A1vnick%C3%A1+787,+753+01+Hranice+I-M%C4%9Bsto&output=embed"
+                title="Proplan Klima - mapa"
+                src="https://www.google.com/maps?q=Hranick%C3%A1+107,+753+61+Hranice+IV-Drahotu%C5%A1e&output=embed"
                 className="w-full aspect-[4/3] border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -65,12 +64,12 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="card p-8 lg:p-10">
+          <div className="card card-flat p-8 lg:p-10">
             <p className="eyebrow">Nezávazná poptávka</p>
             <h2 className="font-display text-3xl text-brand-900 mt-3">Popište nám záměr</h2>
             <p className="mt-2 text-brand-900/70">
               Ať už řešíte projekt nové stavby, rekonstrukci nebo jen výměnu
-              zdroje — ozveme se s návrhem dalšího postupu.
+              zdroje - ozveme se s návrhem dalšího postupu.
             </p>
             <ContactForm />
           </div>
@@ -92,7 +91,7 @@ function ContactCard({
   href?: string;
 }) {
   const Inner = (
-    <div className="card p-6 flex items-start gap-4 hover:border-brand-300 transition-colors">
+    <div className="card card-flat p-6 flex items-start gap-4 hover:border-brand-300 transition-colors">
       <div className="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 grid place-items-center shrink-0">
         {icon}
       </div>

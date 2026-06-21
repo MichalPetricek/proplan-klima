@@ -57,9 +57,9 @@ body {
   color: var(--color-fg) !important;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Pozn.: záměrně BEZ `scroll-behavior: smooth` na <html> — v Next.js App
+   Routeru to rozbíjí skok na začátek stránky při přechodu mezi stránkami
+   (občas nedoroluje úplně nahoru). */
 
 body {
   font-family: var(--font-sans);
@@ -196,6 +196,12 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 28px 50px -30px rgba(59, 42, 31, 0.28);
   border-color: var(--color-brand-300);
+}
+
+/* Varianta karty, která se na hover nezvedá (např. kontaktní karty) */
+.card-flat:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 /* ===== Navbar ===== */

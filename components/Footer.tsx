@@ -52,8 +52,8 @@ export function Footer() {
               </a>
             </li>
             <li className="text-brand-900/70">
-              Trávnická 787<br />
-              Hranice I-Město, 753 01
+              Hranická 107<br />
+              753 61 Hranice IV-Drahotuše
             </li>
           </ul>
         </div>

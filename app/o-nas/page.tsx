@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CTASection } from "@/components/CTASection";
+import { partners } from "@/components/partners-data";
 import { IconArrow, IconCheck } from "@/components/icons";
 import { asset } from "@/lib/paths";
 
 export const metadata = {
   title: "O nás",
   description:
-    "Proplan Klima — projekce TZB, klimatizací, vzduchotechniky a tepelných čerpadel. Rychlost, přesnost a flexibilita řešení.",
+    "Proplan Klima - projekce TZB, klimatizací, vzduchotechniky a tepelných čerpadel. Rychlost, přesnost a flexibilita řešení.",
 };
 
 export default function AboutPage() {
@@ -23,8 +24,9 @@ export default function AboutPage() {
             <p className="reveal mt-6 text-lg text-brand-900/80 leading-relaxed" data-delay="160">
               Proplan Klima vzniklo proto, aby projekce klimatizací,
               vzduchotechniky a tepelných čerpadel přestala být na stavbě
-              kompromisem. Naší hlavní činností je projekce TZB — a protože
-              víme, jak má vypadat dobrá dokumentace, umíme ji i postavit.
+              kompromisem. Naší hlavní činností je projekce TZB - a protože
+              víme, jak má vypadat dobrá dokumentace, doprovodíme ji
+              i odborným dozorem až k realizaci.
             </p>
             <p className="reveal mt-5 text-brand-900/75 leading-relaxed" data-delay="200">
               Kombinujeme pokročilý počítačový design, ověřené značky
@@ -43,13 +45,14 @@ export default function AboutPage() {
           <div className="reveal" data-delay="200">
             <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.4)]">
               <Image
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80"
-                alt="Tým Proplan Klima"
+                src={asset("/drawings/schema.svg")}
+                alt="Technický výkres zdroje tepla"
                 fill
+                unoptimized
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/20 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-5 flex items-center gap-4">
                 <Image src={asset("/logo.png")} alt="Proplan Klima" width={1500} height={1000} unoptimized className="h-10 w-auto" />
                 <p className="text-sm text-brand-900/80">
@@ -57,24 +60,6 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-paper-soft">
-        <div className="max-w-5xl mx-auto px-6 lg:px-10">
-          <div className="grid sm:grid-cols-4 gap-6 text-center">
-            {[
-              { n: "5+", l: "let zkušeností" },
-              { n: "100+", l: "projektů a realizací" },
-              { n: "100%", l: "vlastní tým" },
-              { n: "48 h", l: "reakce na servis" },
-            ].map((s) => (
-              <div key={s.l} className="reveal bg-white rounded-2xl border border-[var(--color-line)] py-8 px-4">
-                <p className="font-display text-5xl text-brand-900">{s.n}</p>
-                <p className="text-[0.7rem] uppercase tracking-[0.18em] text-brand-700 mt-2 font-semibold">{s.l}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -90,14 +75,14 @@ export default function AboutPage() {
           <div className="space-y-5">
             <p className="text-brand-900/80 leading-relaxed reveal">
               Věříme, že technologie pro vytápění, chlazení a větrání by měla
-              být tichou součástí architektury — ne rušivým prvkem. Proto
+              být tichou součástí architektury - ne rušivým prvkem. Proto
               klademe důraz na pečlivý návrh, čisté provedení a integraci do
               interiéru. Stejnou pozornost věnujeme energetické ekonomice
               celého řešení.
             </p>
             <ul className="space-y-2.5">
               {[
-                "Projekce je řemeslo — nepodceňujeme ji ani u malých staveb.",
+                "Projekce je řemeslo - nepodceňujeme ji ani u malých staveb.",
                 "Vždy spočítáme tepelné ztráty a zisky. Bez čísel ne.",
                 "Návrh děláme tak, aby šel postavit, ne jen vypadat na papíře.",
                 "Cenu řešení známe od začátku, ne až při dokončování.",
@@ -123,13 +108,19 @@ export default function AboutPage() {
             techniky. Spolupracujeme s architektonickými studii, developery
             i přímo s majiteli rodinných domů.
           </p>
-          <div className="mt-10 grid grid-cols-3 sm:grid-cols-5 gap-3 reveal" data-delay="160">
-            {["DAIKIN", "MITSUBISHI", "PANASONIC", "LG", "SAMSUNG", "TOSHIBA", "VAILLANT", "REGULUS", "GREE", "AC HEATING"].map((b) => (
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-5 gap-3 reveal" data-delay="160">
+            {partners.map((p) => (
               <div
-                key={b}
-                className="bg-white border border-[var(--color-line)] rounded-xl px-3 py-4 text-center text-brand-800 font-display tracking-[0.2em] text-sm"
+                key={p.name}
+                title={p.note ?? p.name}
+                className="bg-white border border-[var(--color-line)] rounded-xl px-5 py-7 flex items-center justify-center h-24"
               >
-                {b}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={asset(p.logo)}
+                  alt={p.note ?? p.name}
+                  className="max-h-10 w-full object-contain"
+                />
               </div>
             ))}
           </div>

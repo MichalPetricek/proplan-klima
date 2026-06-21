@@ -36,8 +36,8 @@ export function Navbar() {
         scrolled ? "nav-shell--scrolled" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center group" aria-label="Proplan Klima">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 h-20 flex items-center justify-between">
+        <Link href="/" className="flex items-center group -ml-1" aria-label="Proplan Klima">
           <Image
             src={asset("/logo.png")}
             alt="Proplan Klima"
@@ -45,7 +45,7 @@ export function Navbar() {
             height={1000}
             priority
             unoptimized
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
 

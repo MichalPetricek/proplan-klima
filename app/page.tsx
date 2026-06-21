@@ -1,24 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { services } from "@/components/services-data";
+import { partners } from "@/components/partners-data";
 import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
 import { asset } from "@/lib/paths";
 
-const HERO =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
-const GALLERY = [
-  { src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80", label: "Projekt TZB pro novostavbu RD", type: "Projekce" },
-  { src: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=900&q=80", label: "Klimatizace v obývacím pokoji", type: "Klimatizace" },
-  { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80", label: "Strojovna tepelného čerpadla", type: "Tepelné čerpadlo" },
-  { src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80", label: "Rozvody VZT v podhledu", type: "Vzduchotechnika" },
-  { src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80", label: "Designová instalace v ložnici", type: "Klimatizace" },
-  { src: "https://images.unsplash.com/photo-1597490280022-c9f76a9c8b18?auto=format&fit=crop&w=900&q=80", label: "Venkovní jednotka u RD", type: "Tepelné čerpadlo" },
-  { src: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=900&q=80", label: "Kazetová jednotka v kanceláři", type: "Klimatizace" },
-];
-
-const PROCESS_IMG =
-  "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80";
+const HERO = asset("/drawings/vzt.svg");
+const PROCESS_IMG = asset("/drawings/schema.svg");
 
 export default function Home() {
   return (
@@ -42,7 +31,7 @@ export default function Home() {
             <p className="reveal mt-7 max-w-xl text-lg text-brand-900/75 leading-relaxed" data-delay="160">
               Naší hlavní činností je projekce klimatizací, vzduchotechniky
               a tepelných čerpadel. Dodáváme čisté, technicky promyšlené
-              návrhy — a postavíme je pro Vás i na klíč.
+              návrhy - a postavíme je pro Vás i na klíč.
             </p>
             <div className="reveal mt-9 flex flex-wrap gap-3" data-delay="240">
               <Link href="/kontakt" className="btn btn-primary">
@@ -52,12 +41,6 @@ export default function Home() {
                 Projekce &amp; poradenství
               </Link>
             </div>
-
-            <dl className="reveal mt-14 grid grid-cols-3 gap-6 max-w-xl border-t border-[var(--color-line)] pt-8" data-delay="320">
-              <Stat number="5+" label="let zkušeností" />
-              <Stat number="100+" label="realizací" />
-              <Stat number="48 h" label="reakce na servis" />
-            </dl>
           </div>
 
           <div className="relative reveal" data-delay="180">
@@ -65,13 +48,14 @@ export default function Home() {
               <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-30px_rgba(59,42,31,0.45)]">
                 <Image
                   src={HERO}
-                  alt="Moderní interiér s klimatizací"
+                  alt="Výkres rozvodů vzduchotechniky"
                   fill
                   priority
+                  unoptimized
                   sizes="(min-width: 1024px) 40vw, 90vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/20 via-transparent to-transparent" />
               </div>
 
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl px-5 py-4 shadow-[0_24px_50px_-20px_rgba(59,42,31,0.35)] border border-[var(--color-line)] float">
@@ -94,17 +78,19 @@ export default function Home() {
 
         <div className="relative border-y border-[var(--color-line)] bg-white/60 backdrop-blur-sm">
           <div className="overflow-hidden">
-            <div className="marquee-track flex whitespace-nowrap py-5 text-brand-700/70 font-display text-xl tracking-[0.22em]">
+            <div className="marquee-track flex items-center whitespace-nowrap py-8">
               {Array.from({ length: 2 }).map((_, i) => (
-                <div key={i} className="flex items-center gap-12 px-6">
-                  {["DAIKIN", "MITSUBISHI", "PANASONIC", "LG", "SAMSUNG", "TOSHIBA", "VAILLANT", "REGULUS", "GREE"].map(
-                    (b) => (
-                      <span key={b + i} className="flex items-center gap-12">
-                        <span>{b}</span>
-                        <span className="text-brand-400">◆</span>
-                      </span>
-                    )
-                  )}
+                <div key={i} className="flex items-center gap-16 px-8 shrink-0">
+                  {partners.map((p) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={p.name + i}
+                      src={asset(p.logo)}
+                      alt={p.note ?? p.name}
+                      title={p.note ?? p.name}
+                      className="h-12 w-40 object-contain shrink-0"
+                    />
+                  ))}
                 </div>
               ))}
             </div>
@@ -119,9 +105,10 @@ export default function Home() {
             <div className="relative reveal">
               <div className="aspect-[5/6] relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.4)]">
                 <Image
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80"
-                  alt="Projekce technického zařízení budov"
+                  src={asset("/drawings/heating.svg")}
+                  alt="Výkres podlahového vytápění"
                   fill
+                  unoptimized
                   sizes="(min-width: 1024px) 45vw, 90vw"
                   className="object-cover"
                 />
@@ -136,12 +123,12 @@ export default function Home() {
               <p className="eyebrow reveal">Co je naše srdce</p>
               <h2 className="reveal font-display text-4xl sm:text-5xl lg:text-6xl mt-5 text-brand-900 leading-[1.05]" data-delay="80">
                 Projekce &amp; poradenství
-                <span className="block italic text-brand-600">— hlavní činnost firmy.</span>
+                <span className="block italic text-brand-600">- hlavní činnost firmy.</span>
               </h2>
               <p className="reveal mt-6 text-lg text-brand-900/80 leading-relaxed" data-delay="160">
                 Specializujeme se na projektování klimatizací, vzduchotechniky a
                 tepelných čerpadel. Vytváříme kompletní projektovou dokumentaci
-                pro novostavby, rekonstrukce i komerční stavby — od studie, přes
+                pro novostavby, rekonstrukce i komerční stavby - od studie, přes
                 DUR a DSP až po DPS s detailním rozpočtem.
               </p>
               <ul className="reveal mt-7 grid sm:grid-cols-2 gap-3" data-delay="200">
@@ -151,7 +138,7 @@ export default function Home() {
                   "Návrh klimatizace, VZT, vytápění",
                   "Energetická optimalizace",
                   "Spolupráce s architekty",
-                  "Oponentury cizích projektů",
+                  "Nezávislé technické poradenství",
                 ].map((b) => (
                   <li key={b} className="flex items-start gap-2.5 text-brand-900/85">
                     <IconCheck width={20} height={20} className="text-brand-600 shrink-0 mt-0.5" />
@@ -184,9 +171,9 @@ export default function Home() {
               </h2>
             </div>
             <p className="reveal text-brand-900/70 text-lg lg:max-w-xl lg:justify-self-end leading-relaxed" data-delay="160">
-              Od projekce — která je naším řemeslem — přes dodávku a instalaci
-              až po dlouhodobý servis. Vždy s důrazem na detail, design a
-              ekonomiku provozu.
+              Těžištěm naší práce je projekce - od výpočtů a dokumentace až po
+              odborný dozor. K tomu poradíme s výběrem techniky i realizace.
+              Vždy s důrazem na detail, design a ekonomiku provozu.
             </p>
           </div>
 
@@ -239,16 +226,17 @@ export default function Home() {
             <div className="aspect-[4/5] relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.35)]">
               <Image
                 src={PROCESS_IMG}
-                alt="Náš pracovní postup"
+                alt="Schéma zdroje tepla - technický výkres"
                 fill
+                unoptimized
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-[var(--color-line)] max-w-[260px]">
-              <p className="font-display text-3xl text-brand-900">Od A do Z</p>
+              <p className="font-display text-3xl text-brand-900">Od návrhu k dílu</p>
               <p className="mt-2 text-sm text-brand-900/70">
-                Projekce, realizace i servis. Jeden partner pro celý projekt.
+                Promyšlená projekce a odborný dozor až do realizace.
               </p>
             </div>
           </div>
@@ -267,9 +255,8 @@ export default function Home() {
             <ol className="space-y-3 mt-10">
               {[
                 { t: "Konzultace zdarma", d: "Probereme záměr, prostor a očekávání. Doporučíme nejvhodnější systém." },
-                { t: "Návrh a projekt", d: "Připravíme řešení na míru, vizualizace a transparentní cenovou nabídku." },
-                { t: "Realizace", d: "Profesionální instalace s respektem k interiéru a harmonogramu stavby." },
-                { t: "Servis a péče", d: "Pravidelný servis i pohotovostní zásahy — jste v dobrých rukou." },
+                { t: "Návrh a projekt", d: "Připravíme řešení na míru, projektovou dokumentaci a transparentní cenovou rozvahu." },
+                { t: "Dozor při realizaci", d: "Předáme podklady prověřeným montážním partnerům a hlídáme soulad provedení s projektem." },
               ].map((step, i) => (
                 <li
                   key={step.t}
@@ -300,76 +287,23 @@ export default function Home() {
                 Vybrané <span className="italic text-brand-600">projekty</span>
               </h2>
             </div>
-            <Link href="/reference" className="btn btn-ghost reveal" data-delay="120">
-              Všechny reference <IconArrow width={18} height={18} />
+          </div>
+
+          <div className="card p-10 lg:p-14 text-center max-w-3xl mx-auto reveal">
+            <p className="font-display text-3xl text-brand-900">Reference právě připravujeme</p>
+            <p className="mt-4 text-brand-900/75 leading-relaxed">
+              Aktuálně sbíráme podklady z dokončených projektů, abychom je sem
+              mohli postupně doplňovat a zveřejňovat. Ozvěte se nám - rádi
+              ukážeme konkrétní řešení i osobně.
+            </p>
+            <Link href="/kontakt" className="btn btn-primary mt-7">
+              Nezávazná poptávka <IconArrow width={18} height={18} />
             </Link>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {GALLERY.map((g, i) => (
-              <div
-                key={g.label}
-                className={`media reveal ${i === 0 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"}`}
-                data-delay={i * 70}
-              >
-                <Image
-                  src={g.src}
-                  alt={g.label}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="media-caption">
-                  <span className="font-medium">{g.label}</span>
-                  <span className="text-brand-600 text-xs uppercase tracking-[0.18em] font-semibold whitespace-nowrap">
-                    {g.type}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========== VALUES ========== */}
-      <section className="py-24 bg-paper">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="eyebrow justify-center reveal">Proč Proplan Klima</p>
-            <h2 className="font-display text-4xl sm:text-5xl mt-5 text-brand-900 reveal" data-delay="80">
-              Hodnoty, na kterých stavíme
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
-            {[
-              { t: "Projekce v DNA", d: "Projektování je naše hlavní řemeslo. Víme, jak má dobrá dokumentace vypadat — a podle toho i stavíme." },
-              { t: "Design v detailu", d: "Technologie se musí do interiéru hodit. Skryté rozvody, čisté linie, promyšlené umístění." },
-              { t: "Energetická úspora", d: "Volíme systémy s nejlepším poměrem investice, spotřeby a životnosti." },
-              { t: "Vlastní tým", d: "Žádné subdodavatelské řetězce. Garantujeme kvalitu od projektu po předání." },
-              { t: "Férová cena", d: "Transparentní rozpočet bez skrytých položek. Co slíbíme, to platí." },
-              { t: "Záruka & servis", d: "Postaráme se o systém po celou jeho životnost." },
-            ].map((v, i) => (
-              <div key={v.t} className="card p-7 reveal" data-delay={i * 60}>
-                <h3 className="font-display text-2xl text-brand-900">{v.t}</h3>
-                <p className="mt-3 text-brand-900/75 leading-relaxed text-[0.95rem]">{v.d}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
       <CTASection />
     </>
-  );
-}
-
-function Stat({ number, label }: { number: string; label: string }) {
-  return (
-    <div>
-      <dt className="font-display text-4xl sm:text-5xl text-brand-900">{number}</dt>
-      <dd className="text-[0.7rem] mt-1 uppercase tracking-[0.18em] text-brand-700 font-semibold">
-        {label}
-      </dd>
-    </div>
   );
 }

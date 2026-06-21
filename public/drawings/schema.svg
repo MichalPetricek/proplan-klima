@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Schéma technického zařízení budovy">
+  <defs>
+    <pattern id="gridS" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#d9cab6" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" fill="#f3ece2"/>
+  <rect width="1000" height="1000" fill="url(#gridS)"/>
+  <!-- potrubní rozvod -->
+  <g fill="none" stroke="#8a6849" stroke-width="6">
+    <path d="M250 360 L520 360 L520 250 L760 250"/>
+    <path d="M250 560 L520 560 L520 680 L760 680"/>
+    <line x1="250" y1="360" x2="250" y2="560"/>
+  </g>
+  <!-- tepelné čerpadlo -->
+  <g fill="none" stroke="#1d4f91" stroke-width="3">
+    <rect x="150" y="320" width="100" height="280" rx="6"/>
+    <circle cx="200" cy="400" r="34"/>
+    <path d="M178 400 q11 -22 22 0 t22 0" stroke="#1d4f91"/>
+    <text x="200" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#3b2a1f" stroke="none">TČ</text>
+  </g>
+  <!-- akumulační nádrž -->
+  <g fill="none" stroke="#1d4f91" stroke-width="3">
+    <rect x="720" y="200" width="120" height="220" rx="14"/>
+    <line x1="720" y1="270" x2="840" y2="270"/>
+    <line x1="720" y1="340" x2="840" y2="340"/>
+    <text x="780" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#3b2a1f" stroke="none">AKU</text>
+  </g>
+  <!-- rozdělovač -->
+  <g fill="none" stroke="#1d4f91" stroke-width="3">
+    <rect x="700" y="640" width="160" height="80" rx="8"/>
+    <line x1="740" y1="720" x2="740" y2="780"/>
+    <line x1="780" y1="720" x2="780" y2="780"/>
+    <line x1="820" y1="720" x2="820" y2="780"/>
+  </g>
+  <text x="150" y="170" font-family="Arial, sans-serif" font-size="26" fill="#3b2a1f" font-weight="700">SCHÉMA ZDROJE TEPLA</text>
+</svg>

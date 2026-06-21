@@ -3,26 +3,22 @@ import Image from "next/image";
 import { services } from "@/components/services-data";
 import { CTASection } from "@/components/CTASection";
 import { IconCheck, IconArrow } from "@/components/icons";
+import { asset } from "@/lib/paths";
 
 export const metadata = {
   title: "Služby",
   description:
-    "Projekce TZB, klimatizace, tepelná čerpadla, vzduchotechnika, realizace a servis — kompletní služby Proplan Klima.",
+    "Projekce TZB, klimatizace, tepelná čerpadla, vzduchotechnika, realizace a servis - kompletní služby Proplan Klima.",
 };
 
+// Zatím technické výkresy TZB; placeholder-promo označuje místo pro
+// dodanou promo fotku výrobce (Buderus / Atrea / Remak / Viega).
 const serviceImages: Record<string, string> = {
-  klimatizace:
-    "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1200&q=80",
-  "tepelna-cerpadla":
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80",
-  vzduchotechnika:
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
-  projekce:
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80",
-  realizace:
-    "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80",
-  servis:
-    "https://images.unsplash.com/photo-1581094651181-35942459ef62?auto=format&fit=crop&w=1200&q=80",
+  projekce: asset("/drawings/heating.svg"),
+  klimatizace: asset("/placeholder-promo.svg"),
+  "tepelna-cerpadla": asset("/drawings/schema.svg"),
+  vzduchotechnika: asset("/drawings/vzt.svg"),
+  realizace: asset("/drawings/heating.svg"),
 };
 
 export default function ServicesPage() {
@@ -36,11 +32,11 @@ export default function ServicesPage() {
             data-delay="80"
           >
             Projekce TZB <span className="italic text-brand-600">na míru</span>
-            <span className="block">— a celá realizace pod jednou střechou.</span>
+            <span className="block">- a celá realizace pod jednou střechou.</span>
           </h1>
           <p className="reveal mt-6 max-w-2xl text-lg text-brand-900/75" data-delay="160">
             Naší hlavní činností je projekce klimatizace, vzduchotechniky
-            a tepelných čerpadel. K tomu nabízíme i dodávku, montáž a servis —
+            a tepelných čerpadel. K tomu nabízíme i dodávku, montáž a servis -
             takže celý projekt vede jeden partner.
           </p>
 
@@ -115,6 +111,7 @@ export default function ServicesPage() {
                   src={serviceImages[s.slug]}
                   alt={s.title}
                   fill
+                  unoptimized
                   sizes="(min-width: 1024px) 45vw, 90vw"
                   className="object-cover"
                 />

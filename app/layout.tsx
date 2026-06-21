@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { asset } from "@/lib/paths";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -21,23 +20,20 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "Proplan Klima — Originální řešení pro Vaši nemovitost",
+    default: "Proplan Klima - Originální řešení pro Vaši nemovitost",
     template: "%s | Proplan Klima",
   },
   description:
-    "Proplan Klima — projekce, návrh a realizace klimatizací, vzduchotechniky a tepelných čerpadel. Rychlost, přesnost a flexibilita řešení pro Vaši nemovitost.",
+    "Proplan Klima - projekce, návrh a realizace klimatizací, vzduchotechniky a tepelných čerpadel. Rychlost, přesnost a flexibilita řešení pro Vaši nemovitost.",
   metadataBase: new URL("https://www.proplan-klima.cz"),
   openGraph: {
-    title: "Proplan Klima — Originální řešení pro Vaši nemovitost",
+    title: "Proplan Klima - Originální řešení pro Vaši nemovitost",
     description:
       "Projekce a realizace klimatizací, vzduchotechniky a tepelných čerpadel. Hranice, Olomoucký kraj.",
     url: "https://www.proplan-klima.cz",
     siteName: "Proplan Klima",
     locale: "cs_CZ",
     type: "website",
-  },
-  icons: {
-    icon: asset("/logo.png"),
   },
 };
 

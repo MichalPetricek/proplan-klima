@@ -35,7 +35,6 @@ export function ContactForm() {
           <option>Tepelné čerpadlo</option>
           <option>Vzduchotechnika / rekuperace</option>
           <option>Projekce a poradenství</option>
-          <option>Servis</option>
           <option>Něco jiného</option>
         </select>
       </div>
@@ -68,7 +67,7 @@ export function ContactForm() {
 
       {status === "sent" && (
         <p className="text-brand-700 text-sm">
-          Děkujeme — ozveme se Vám co nejdříve.
+          Děkujeme - ozveme se Vám co nejdříve.
         </p>
       )}
       {status === "error" && (

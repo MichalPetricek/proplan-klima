@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Výkres rozvodů vzduchotechniky">
+  <defs>
+    <pattern id="gridV" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#d9cab6" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" fill="#f3ece2"/>
+  <rect width="1000" height="1000" fill="url(#gridV)"/>
+  <g fill="none" stroke="#3b2a1f" stroke-width="3">
+    <!-- půdorys -->
+    <rect x="120" y="140" width="760" height="720"/>
+    <line x1="500" y1="140" x2="500" y2="860"/>
+    <line x1="120" y1="500" x2="500" y2="500"/>
+    <line x1="500" y1="380" x2="880" y2="380"/>
+  </g>
+  <!-- VZT potrubí -->
+  <g fill="none" stroke="#8a6849" stroke-width="14" stroke-linecap="round" opacity="0.85">
+    <path d="M300 860 L300 320 L640 320 L640 600 L760 600"/>
+    <path d="M300 480 L210 480"/>
+    <path d="M640 420 L760 420"/>
+  </g>
+  <!-- výustky / difuzory -->
+  <g fill="none" stroke="#1d4f91" stroke-width="3">
+    <circle cx="210" cy="480" r="24"/><path d="M193 463 L227 497 M227 463 L193 497"/>
+    <circle cx="760" cy="600" r="24"/><path d="M743 583 L777 617 M777 583 L743 617"/>
+    <circle cx="760" cy="420" r="24"/><path d="M743 403 L777 437 M777 403 L743 437"/>
+    <rect x="276" y="296" width="48" height="48"/>
+  </g>
+  <!-- kóty -->
+  <g stroke="#1d4f91" stroke-width="2" fill="#1d4f91" font-family="Arial, sans-serif" font-size="22">
+    <line x1="120" y1="900" x2="880" y2="900"/>
+    <path d="M120 890 L120 910 M880 890 L880 910"/>
+    <text x="470" y="935">12 600</text>
+  </g>
+  <text x="150" y="200" font-family="Arial, sans-serif" font-size="26" fill="#3b2a1f" font-weight="700">VZT — PŮDORYS 1.NP</text>
+</svg>

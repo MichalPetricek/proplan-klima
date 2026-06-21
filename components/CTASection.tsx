@@ -20,7 +20,7 @@ export function CTASection() {
                 Plánujete novou stavbu nebo rekonstrukci?
               </h2>
               <p className="mt-5 text-brand-900/75 max-w-xl reveal" data-delay="160">
-                Ozvěte se nám — připravíme návrh řešení na míru, projektovou
+                Ozvěte se nám - připravíme návrh řešení na míru, projektovou
                 dokumentaci i kompletní realizaci. Bez závazku a s férovou cenou.
               </p>
             </div>
