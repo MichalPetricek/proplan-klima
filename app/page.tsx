@@ -6,8 +6,8 @@ import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
 import { asset } from "@/lib/paths";
 
-const HERO = asset("/drawings/vzt.svg");
-const PROCESS_IMG = asset("/drawings/schema.svg");
+const HERO = asset("/projects/boiler-room.jpg");
+const PROCESS_IMG = asset("/projects/heat-source-schema.jpg");
 
 export default function Home() {
   return (
@@ -44,27 +44,27 @@ export default function Home() {
           </div>
 
           <div className="relative reveal" data-delay="180">
-            <div className="relative aspect-[4/5]">
+            <div className="relative aspect-[5/4] lg:aspect-[4/5]">
               <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-30px_rgba(59,42,31,0.45)]">
                 <Image
                   src={HERO}
-                  alt="Výkres rozvodů vzduchotechniky"
+                  alt="Realizovaná kotelna se třemi kotli Buderus"
                   fill
                   priority
                   unoptimized
                   sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-950/45 via-transparent to-transparent" />
               </div>
 
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl px-5 py-4 shadow-[0_24px_50px_-20px_rgba(59,42,31,0.35)] border border-[var(--color-line)] float">
-                <p className="text-[0.65rem] uppercase tracking-[0.22em] text-brand-600 font-semibold">Projekce</p>
-                <p className="mt-1 font-display text-2xl text-brand-900">Návrh na míru</p>
+                <p className="text-[0.65rem] uppercase tracking-[0.22em] text-brand-600 font-semibold">Od projektu</p>
+                <p className="mt-1 font-display text-2xl text-brand-900">až po realizaci</p>
               </div>
               <div className="absolute -top-5 -right-4 bg-brand-900 text-white rounded-2xl px-5 py-4 shadow-xl" style={{ animationDelay: "1s" }}>
-                <p className="text-[0.65rem] uppercase tracking-[0.22em] text-brand-300 font-semibold">Úspora</p>
-                <p className="mt-1 font-display text-xl">až 70 % nákladů</p>
+                <p className="text-[0.65rem] uppercase tracking-[0.22em] text-brand-300 font-semibold">Skutečná práce</p>
+                <p className="mt-1 font-display text-xl">Proplan Klima</p>
               </div>
               <div className="absolute top-1/2 -left-8 -translate-y-1/2 hidden lg:flex items-center gap-3 bg-white rounded-full pl-3 pr-5 py-2 shadow-md border border-[var(--color-line)]">
                 <span className="w-9 h-9 rounded-full bg-brand-100 grid place-items-center">
@@ -105,8 +105,8 @@ export default function Home() {
             <div className="relative reveal">
               <div className="aspect-[5/6] relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.4)]">
                 <Image
-                  src={asset("/drawings/heating.svg")}
-                  alt="Výkres podlahového vytápění"
+                  src={asset("/projects/vzt-project.jpg")}
+                  alt="Projektová dokumentace vzduchotechniky"
                   fill
                   unoptimized
                   sizes="(min-width: 1024px) 45vw, 90vw"
@@ -223,14 +223,14 @@ export default function Home() {
       <section className="relative py-24 lg:py-32 bg-paper-soft">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
           <div className="reveal relative">
-            <div className="aspect-[4/5] relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.35)]">
+            <div className="aspect-[5/4] relative rounded-[2rem] overflow-hidden bg-white shadow-[0_40px_80px_-32px_rgba(59,42,31,0.35)]">
               <Image
                 src={PROCESS_IMG}
-                alt="Schéma zdroje tepla - technický výkres"
+                alt="Skutečné technické schéma zdroje tepla"
                 fill
                 unoptimized
                 sizes="(min-width: 1024px) 45vw, 90vw"
-                className="object-cover"
+                className="object-contain p-4 sm:p-7"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-[var(--color-line)] max-w-[260px]">
@@ -284,21 +284,46 @@ export default function Home() {
             <div>
               <p className="eyebrow reveal">Realizace</p>
               <h2 className="reveal font-display text-4xl sm:text-5xl mt-5 text-brand-900" data-delay="80">
-                Vybrané <span className="italic text-brand-600">projekty</span>
+                Od výkresu ke <span className="italic text-brand-600">skutečnému dílu</span>
               </h2>
             </div>
+            <Link href="/reference" className="btn btn-ghost reveal" data-delay="160">
+              Všechny reference <IconArrow width={18} height={18} />
+            </Link>
           </div>
 
-          <div className="card p-10 lg:p-14 text-center max-w-3xl mx-auto reveal">
-            <p className="font-display text-3xl text-brand-900">Reference právě připravujeme</p>
-            <p className="mt-4 text-brand-900/75 leading-relaxed">
-              Aktuálně sbíráme podklady z dokončených projektů, abychom je sem
-              mohli postupně doplňovat a zveřejňovat. Ozvěte se nám - rádi
-              ukážeme konkrétní řešení i osobně.
-            </p>
-            <Link href="/kontakt" className="btn btn-primary mt-7">
-              Nezávazná poptávka <IconArrow width={18} height={18} />
-            </Link>
+          <div className="grid lg:grid-cols-12 gap-5">
+            <article className="media group min-h-[420px] lg:col-span-7 reveal">
+              <Image
+                src={asset("/projects/industrial-air-handling.jpg")}
+                alt="Venkovní vzduchotechnická jednotka u průmyslového objektu"
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
+              <div className="project-scrim" />
+              <div className="project-caption">
+                <p>Vzduchotechnika</p>
+                <h3>Venkovní VZT jednotka</h3>
+              </div>
+            </article>
+
+            <article className="media group min-h-[420px] lg:col-span-5 reveal" data-delay="100">
+              <Image
+                src={asset("/projects/boiler-room-detail.jpg")}
+                alt="Detail technologické kotelny Buderus"
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                className="object-cover"
+              />
+              <div className="project-scrim" />
+              <div className="project-caption">
+                <p>Vytápění</p>
+                <h3>Kaskádová kotelna Buderus</h3>
+              </div>
+            </article>
           </div>
         </div>
       </section>

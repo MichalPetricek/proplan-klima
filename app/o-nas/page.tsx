@@ -45,8 +45,8 @@ export default function AboutPage() {
           <div className="reveal" data-delay="200">
             <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-32px_rgba(59,42,31,0.4)]">
               <Image
-                src={asset("/drawings/schema.svg")}
-                alt="Technický výkres zdroje tepla"
+                src={asset("/projects/boiler-room.jpg")}
+                alt="Realizovaná technická místnost se zdrojem tepla Buderus"
                 fill
                 unoptimized
                 sizes="(min-width: 1024px) 45vw, 90vw"

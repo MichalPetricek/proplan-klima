@@ -11,14 +11,12 @@ export const metadata = {
     "Projekce TZB, klimatizace, tepelná čerpadla, vzduchotechnika, realizace a servis - kompletní služby Proplan Klima.",
 };
 
-// Zatím technické výkresy TZB; placeholder-promo označuje místo pro
-// dodanou promo fotku výrobce (Buderus / Atrea / Remak / Viega).
 const serviceImages: Record<string, string> = {
-  projekce: asset("/drawings/heating.svg"),
-  klimatizace: asset("/placeholder-promo.svg"),
-  "tepelna-cerpadla": asset("/drawings/schema.svg"),
-  vzduchotechnika: asset("/drawings/vzt.svg"),
-  realizace: asset("/drawings/heating.svg"),
+  projekce: asset("/projects/vzt-project.jpg"),
+  klimatizace: asset("/projects/ac-midea.jpg"),
+  "tepelna-cerpadla": asset("/projects/heat-source-schema.jpg"),
+  vzduchotechnika: asset("/projects/industrial-air-handling.jpg"),
+  realizace: asset("/projects/boiler-room-detail.jpg"),
 };
 
 export default function ServicesPage() {
@@ -113,7 +111,7 @@ export default function ServicesPage() {
                   fill
                   unoptimized
                   sizes="(min-width: 1024px) 45vw, 90vw"
-                  className="object-cover"
+                  className={s.slug === "tepelna-cerpadla" ? "object-contain bg-white p-4" : "object-cover"}
                 />
                 {s.featured && (
                   <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 border border-[var(--color-line)]">
