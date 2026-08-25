@@ -25,15 +25,6 @@ export function ContactForm() {
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setErrorMessage(
-        "Formulář ještě není nakonfigurovaný. Napište nám prosím přímo e-mailem.",
-      );
-      setStatus("error");
-      return;
-    }
-
     setStatus("submitting");
     setErrorMessage("");
 
@@ -45,21 +36,14 @@ export function ContactForm() {
       });
     }
 
-    try {
-      await emailjs.sendForm(serviceId, templateId, form, {
-        publicKey,
-        blockHeadless: true,
-        limitRate: {
-          id: "proplan-contact-form",
-          throttle: 10_000,
-        },
-      });
-
-      const supabase = getSupabaseBrowserClient();
-      if (supabase) {
-        // E-mail je hlavní doručovací kanál. Uložení v Supabase je evidence
-        // pro budoucí inbox v administraci a nesmí blokovat úspěšné odeslání.
-        await supabase.from("contact_submissions").insert({
+    // Poptávka se ukládá jako první. Kdyby EmailJS selhal nebo vyčerpal limit,
+    // zůstane zaznamenaná v administraci a nepřijdeme o ni.
+    let stored = false;
+    const supabase = getSupabaseBrowserClient();
+    if (supabase) {
+      const { error: storeError } = await supabase
+        .from("contact_submissions")
+        .insert({
           from_name: String(formData.get("from_name") ?? ""),
           reply_to: String(formData.get("reply_to") ?? ""),
           phone: String(formData.get("phone") ?? ""),
@@ -67,16 +51,38 @@ export function ContactForm() {
           service: String(formData.get("service") ?? ""),
           message: String(formData.get("message") ?? ""),
         });
-      }
+      stored = !storeError;
+    }
 
+    let emailed = false;
+    if (serviceId && templateId && publicKey) {
+      try {
+        await emailjs.sendForm(serviceId, templateId, form, {
+          publicKey,
+          blockHeadless: true,
+          limitRate: {
+            id: "proplan-contact-form",
+            throttle: 10_000,
+          },
+        });
+        emailed = true;
+      } catch {
+        emailed = false;
+      }
+    }
+
+    if (emailed || stored) {
+      // Poptávku máme zachycenou aspoň jedním kanálem – pro odesílatele je to
+      // úspěch, o interní doručení se postaráme my.
       setStatus("sent");
       form.reset();
-    } catch {
-      setErrorMessage(
-        "Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo nám napište přímo e-mailem.",
-      );
-      setStatus("error");
+      return;
     }
+
+    setErrorMessage(
+      "Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo nám napište přímo na info@proplan-klima.cz.",
+    );
+    setStatus("error");
   }
 
   return (

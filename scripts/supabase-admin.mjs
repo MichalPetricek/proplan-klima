@@ -152,15 +152,23 @@ async function check() {
     }
   }
 
-  // Anonym nesmí vidět evidenci poptávek.
-  const leak = await fetch(`${url}/rest/v1/contact_submissions?select=reply_to`, {
-    headers: anonHeaders,
-  });
-  if (leak.status === 200) {
+  // Anonym nesmí vidět evidenci poptávek. Samotné HTTP 200 ještě únik
+  // neznamená – RLS vrací prázdné pole. Průkazné je až srovnání s tím,
+  // co ve stejné tabulce vidí secret key.
+  const [anonRows, adminRows] = await Promise.all([
+    api("/rest/v1/contact_submissions?select=id", { headers: anonHeaders }),
+    api("/rest/v1/contact_submissions?select=id"),
+  ]);
+  const anonCount = Array.isArray(anonRows.body) ? anonRows.body.length : 0;
+  const adminCount = Array.isArray(adminRows.body) ? adminRows.body.length : 0;
+
+  if (anonCount > 0) {
     anonFailed += 1;
-    console.log("  ✗ poptávky jsou veřejně čitelné – zkontrolujte RLS!");
+    console.log(`  ✗ poptávky jsou veřejně čitelné (${anonCount}) – zkontrolujte RLS!`);
+  } else if (adminCount === 0) {
+    console.log("  · poptávky: zatím žádné, skrytí se ověří s první poptávkou");
   } else {
-    console.log(`  ✓ poptávky jsou pro veřejnost skryté (HTTP ${leak.status})`);
+    console.log(`  ✓ poptávky skryté – správce vidí ${adminCount}, veřejnost 0`);
   }
 
   if (anonFailed) process.exitCode = 1;

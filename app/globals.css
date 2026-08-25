@@ -359,6 +359,90 @@ body {
   border-color: var(--color-brand-300);
 }
 
+/* ===== Admin – modální okna ===== */
+.admin-modal {
+  width: min(56rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 3rem);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 1.5rem;
+  background: white;
+  color: var(--color-brand-900);
+  overflow: hidden;
+  box-shadow: 0 40px 90px -50px rgba(59, 42, 31, 0.65);
+}
+
+.admin-modal-narrow {
+  width: min(34rem, calc(100vw - 2rem));
+}
+
+.admin-modal::backdrop {
+  background: rgba(59, 42, 31, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.admin-modal[open] {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  animation: admin-modal-in 0.18s ease-out;
+}
+
+@keyframes admin-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-modal[open] {
+    animation: none;
+  }
+}
+
+.admin-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 1.9rem);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.admin-modal-body {
+  padding: clamp(1.25rem, 3vw, 1.9rem);
+  overflow-y: auto;
+}
+
+.admin-modal-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.4rem) clamp(1.25rem, 3vw, 1.9rem);
+  border-top: 1px solid var(--color-line);
+  background: var(--color-brand-50);
+}
+
+.admin-modal-close {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: white;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-brand-900);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-modal-close:hover {
+  background: var(--color-brand-50);
+  border-color: var(--color-brand-300);
+}
+
 /* ===== Section divider ===== */
 .divider-leaf {
   display: flex;

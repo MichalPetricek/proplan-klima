@@ -43,7 +43,8 @@ trojité závorky zde nejsou potřeba.
 
 ## 2. Proměnné prostředí
 
-Zkopírujte `.env.example` do `.env.local` a doplňte:
+Hodnoty patří do **`.env`** (ne do `.env.local`) – jsou to `NEXT_PUBLIC_`
+proměnné a build na GitHub Pages je čte právě odtud:
 
 ```text
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=...
@@ -52,9 +53,24 @@ NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=...
 ```
 
 Veřejný EmailJS klíč je určený pro kód v prohlížeči. Privátní klíč se do webu
-nevkládá. Po změně proměnných je potřeba web znovu sestavit a nasadit.
+nevkládá. Po změně proměnných je potřeba web znovu sestavit a nasadit – u
+GitHub Pages stačí push do `main`.
 
-## 3. Ochrana formuláře
+V EmailJS ještě v **Account → Security** povolte doménu, ze které se formulář
+odesílá (`michalpetricek.github.io`, případně ostrou doménu webu).
+
+## 3. Když odeslání selže
+
+Formulář nejdřív uloží poptávku do Supabase a teprve potom volá EmailJS.
+Když je EmailJS nedostupný, vyčerpá měsíční limit nebo ještě není
+nakonfigurovaný, poptávka se neztratí – zůstane v administraci v sekci
+**Poptávky**. Chybovou hlášku návštěvník uvidí jen tehdy, když selžou oba
+kanály.
+
+Praktický důsledek: dokud nejsou EmailJS proměnné vyplněné, formulář funguje,
+ale poptávky chodí pouze do administrace, ne na e-mail.
+
+## 4. Ochrana formuláře
 
 Formulář má honeypot, blokování headless klientů a desetisekundový limit mezi
 odesláními v jednom prohlížeči. Před ostrým provozem doporučujeme v EmailJS

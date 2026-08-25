@@ -4,12 +4,14 @@ import type { User } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { ContactEditor } from "@/components/admin/ContactEditor";
 import { ReferencesEditor } from "@/components/admin/ReferencesEditor";
+import { SubmissionsEditor } from "@/components/admin/SubmissionsEditor";
+import { UsersEditor } from "@/components/admin/UsersEditor";
 import {
   getSupabaseBrowserClient,
   isSupabaseConfigured,
 } from "@/lib/supabase/client";
 
-type View = "contacts" | "references" | "future";
+type View = "contacts" | "references" | "submissions" | "users" | "future";
 
 export function AdminApp() {
   const [user, setUser] = useState<User | null>(null);
@@ -84,6 +86,12 @@ export function AdminApp() {
             <AdminNavButton active={view === "references"} onClick={() => setView("references")}>
               Reference
             </AdminNavButton>
+            <AdminNavButton active={view === "submissions"} onClick={() => setView("submissions")}>
+              Poptávky
+            </AdminNavButton>
+            <AdminNavButton active={view === "users"} onClick={() => setView("users")}>
+              Uživatelé
+            </AdminNavButton>
             <AdminNavButton active={view === "future"} onClick={() => setView("future")}>
               Další obsah
             </AdminNavButton>
@@ -92,6 +100,8 @@ export function AdminApp() {
           <section>
             {view === "contacts" && <ContactEditor />}
             {view === "references" && <ReferencesEditor />}
+            {view === "submissions" && <SubmissionsEditor />}
+            {view === "users" && <UsersEditor currentUser={user} />}
             {view === "future" && <FutureModules />}
           </section>
         </div>
@@ -210,7 +220,7 @@ function FutureModules() {
         Přidáme je podle dalších požadavků klienta.
       </p>
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-8">
-        {['Služby', 'Partneři', 'Dokumenty', 'Poptávky', 'Aktuality', 'SEO'].map((item) => (
+        {['Služby', 'Partneři', 'Dokumenty', 'Aktuality', 'SEO'].map((item) => (
           <div key={item} className="rounded-xl border border-dashed border-brand-300 bg-brand-50 p-5 text-brand-900/55">
             <p className="font-medium text-brand-900/75">{item}</p>
             <p className="text-xs mt-1">Budoucí modul</p>

@@ -79,6 +79,13 @@ alter table public.site_contacts enable row level security;
 alter table public.references enable row level security;
 alter table public.contact_submissions enable row level security;
 
+-- Supabase dává rolím anon/authenticated přes default privileges plná práva
+-- na nové tabulky v public. Nejdřív je odebereme, ať jsou práva níže přesná
+-- a data nechrání jen RLS, ale i samotné granty.
+revoke all on table public.site_contacts from anon, authenticated;
+revoke all on table public.references from anon, authenticated;
+revoke all on table public.contact_submissions from anon, authenticated;
+
 grant select on public.site_contacts to anon, authenticated;
 grant insert, update on public.site_contacts to authenticated;
 
