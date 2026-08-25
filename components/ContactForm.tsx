@@ -28,13 +28,15 @@ export function ContactForm() {
     setStatus("submitting");
     setErrorMessage("");
 
-    const sentAt = form.elements.namedItem("sent_at");
-    if (sentAt instanceof HTMLInputElement) {
-      sentAt.value = new Date().toLocaleString("cs-CZ", {
-        dateStyle: "long",
-        timeStyle: "short",
-      });
-    }
+    const field = (name: string) => String(formData.get(name) ?? "").trim();
+    const submission = {
+      from_name: field("from_name"),
+      reply_to: field("reply_to"),
+      phone: field("phone"),
+      location: field("location"),
+      service: field("service"),
+      message: field("message"),
+    };
 
     // Poptávka se ukládá jako první. Kdyby EmailJS selhal nebo vyčerpal limit,
     // zůstane zaznamenaná v administraci a nepřijdeme o ni.
@@ -43,28 +45,37 @@ export function ContactForm() {
     if (supabase) {
       const { error: storeError } = await supabase
         .from("contact_submissions")
-        .insert({
-          from_name: String(formData.get("from_name") ?? ""),
-          reply_to: String(formData.get("reply_to") ?? ""),
-          phone: String(formData.get("phone") ?? ""),
-          location: String(formData.get("location") ?? ""),
-          service: String(formData.get("service") ?? ""),
-          message: String(formData.get("message") ?? ""),
-        });
+        .insert(submission);
       stored = !storeError;
     }
 
     let emailed = false;
     if (serviceId && templateId && publicKey) {
       try {
-        await emailjs.sendForm(serviceId, templateId, form, {
-          publicKey,
-          blockHeadless: true,
-          limitRate: {
-            id: "proplan-contact-form",
-            throttle: 10_000,
+        // send() místo sendForm(): nepovinná pole doplníme, ať v šabloně
+        // nezůstane prázdné místo.
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            ...submission,
+            phone: submission.phone || "neuvedeno",
+            location: submission.location || "neuvedeno",
+            service: submission.service || "Nespecifikováno",
+            sent_at: new Date().toLocaleString("cs-CZ", {
+              dateStyle: "long",
+              timeStyle: "short",
+            }),
           },
-        });
+          {
+            publicKey,
+            blockHeadless: true,
+            limitRate: {
+              id: "proplan-contact-form",
+              throttle: 10_000,
+            },
+          },
+        );
         emailed = true;
       } catch {
         emailed = false;
@@ -127,7 +138,6 @@ export function ContactForm() {
         <label htmlFor="company">Firma</label>
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
-      <input type="hidden" name="sent_at" defaultValue="" />
 
       <label className="flex items-start gap-3 text-sm text-brand-900/80">
         <input type="checkbox" required className="mt-1 accent-[var(--brand-700)]" />

@@ -41,6 +41,47 @@ Nová poptávka z webu – {{service}} – {{from_name}}
 Používejte dvojité složené závorky. EmailJS obsah automaticky escapuje;
 trojité závorky zde nejsou potřeba.
 
+## 1b. Připojení schránky Forpsi (SMTP)
+
+Forpsi není mezi předpřipravenými službami, v **Email Services → Select
+Service** proto zvolte **SMTP Server** a vyplňte:
+
+| Pole | Hodnota |
+| --- | --- |
+| SMTP server / Host | `smtp.forpsi.com` |
+| Port | `465` (SSL) – funguje i `587` se STARTTLS |
+| Secure / TLS | zapnuto |
+| Username | **celá** e-mailová adresa, např. `info@proplan-klima.cz` |
+| Password | heslo ke schránce |
+
+Server na obou portech nabízí `AUTH LOGIN PLAIN`, ověřeno spojením.
+
+**Doporučení:** založte u Forpsi samostatnou schránku jen pro web (např.
+`web@proplan-klima.cz`) a použijte ji tady. Heslo se ukládá u EmailJS, takže
+případný únik se pak netýká hlavní firemní schránky.
+
+### Odesílatel v šabloně
+
+Do **From Email** patří vždy adresa z vlastní domény, kterou se SMTP
+autentizuje – nikdy e-mail poptávajícího. Jinak zpráva neprojde kontrolou SPF
+a skončí ve spamu, případně ji Forpsi rovnou odmítne. Adresa odesílatele se
+řeší přes **Reply-To**:
+
+| Pole šablony | Hodnota |
+| --- | --- |
+| To Email | `info@proplan-klima.cz` |
+| From Name | `Poptávka z webu – {{from_name}}` |
+| From Email | `info@proplan-klima.cz` (nebo `web@…`) |
+| Reply-To | `{{reply_to}}` |
+
+Odpověď na doručenou poptávku pak jde rovnou zákazníkovi.
+
+### Limity
+
+Forpsi zvládne 1000 zpráv za hodinu, přísnější je tedy free plán EmailJS –
+200 e-mailů měsíčně. Poptávky se navíc vždy ukládají do administrace, takže
+ani po vyčerpání limitu o žádnou nepřijdete.
+
 ## 2. Proměnné prostředí
 
 Hodnoty patří do **`.env`** (ne do `.env.local`) – jsou to `NEXT_PUBLIC_`

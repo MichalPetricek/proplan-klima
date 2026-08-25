@@ -1,0 +1,110 @@
+<!-- Šablona poptávkového e-mailu pro EmailJS.
+     Vložte celý obsah tohoto souboru do pole Content v HTML režimu editoru.
+
+     Tabulkový layout a inline styly jsou v e-mailu nutnost – Outlook na
+     Windows renderuje přes Word a moderní CSS (flex, grid, <style> bloky)
+     zahazuje. Šířka 600 px je bezpečná ve všech klientech. -->
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">
+  {{from_name}} – {{service}} – {{phone}}
+</div>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f5ecdc;margin:0;padding:24px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <tr>
+    <td align="center">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:600px;max-width:100%;background-color:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #ebe1ce;">
+
+        <!-- Záhlaví -->
+        <tr>
+          <td style="background-color:#3b2a1f;padding:26px 32px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c4a37e;font-weight:600;padding-bottom:6px;">
+                  Nová poptávka z webu
+                </td>
+              </tr>
+              <tr>
+                <td style="font-size:24px;line-height:1.25;color:#ffffff;font-weight:600;">
+                  {{service}}
+                </td>
+              </tr>
+              <tr>
+                <td style="font-size:14px;color:#d9c2a0;padding-top:6px;">
+                  od {{from_name}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Kontaktní údaje -->
+        <tr>
+          <td style="padding:28px 32px 8px 32px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td width="110" style="font-size:13px;color:#8a6849;padding:9px 0;vertical-align:top;">E-mail</td>
+                <td style="font-size:15px;color:#3b2a1f;padding:9px 0;vertical-align:top;">
+                  <a href="mailto:{{reply_to}}" style="color:#6b4a33;text-decoration:none;font-weight:600;">{{reply_to}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="border-top:1px solid #ebe1ce;font-size:0;line-height:0;">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="110" style="font-size:13px;color:#8a6849;padding:9px 0;vertical-align:top;">Telefon</td>
+                <td style="font-size:15px;color:#3b2a1f;padding:9px 0;vertical-align:top;">
+                  <a href="tel:{{phone}}" style="color:#6b4a33;text-decoration:none;font-weight:600;">{{phone}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="border-top:1px solid #ebe1ce;font-size:0;line-height:0;">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="110" style="font-size:13px;color:#8a6849;padding:9px 0;vertical-align:top;">Lokalita</td>
+                <td style="font-size:15px;color:#3b2a1f;padding:9px 0;vertical-align:top;">{{location}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Zpráva -->
+        <tr>
+          <td style="padding:16px 32px 4px 32px;">
+            <div style="font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#8a6849;font-weight:600;padding-bottom:10px;">
+              Zpráva
+            </div>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#fbf7f1;border-left:3px solid #a98463;border-radius:0 8px 8px 0;">
+              <tr>
+                <td style="padding:16px 18px;font-size:15px;line-height:1.65;color:#3b2a1f;white-space:pre-line;">{{message}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Tlačítko odpovědi -->
+        <tr>
+          <td style="padding:24px 32px 30px 32px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:#6b4a33;border-radius:999px;">
+                  <a href="mailto:{{reply_to}}" style="display:inline-block;padding:13px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">
+                    Odpovědět zákazníkovi
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Patička -->
+        <tr>
+          <td style="background-color:#fbf7f1;border-top:1px solid #ebe1ce;padding:18px 32px;font-size:12px;line-height:1.6;color:#8a6849;">
+            Odesláno {{sent_at}} z kontaktního formuláře na webu PROPLAN Klima.<br>
+            Odpověď na tento e-mail zamíří přímo poptávajícímu.
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
