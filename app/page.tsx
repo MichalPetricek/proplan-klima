@@ -5,6 +5,7 @@ import { partners } from "@/components/partners-data";
 import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
 import { asset } from "@/lib/paths";
+import { ReferenceHighlights } from "@/components/ReferenceContent";
 
 const HERO = asset("/projects/boiler-room.jpg");
 const PROCESS_IMG = asset("/projects/heat-source-schema.jpg");
@@ -292,39 +293,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-5">
-            <article className="media group min-h-[420px] lg:col-span-7 reveal">
-              <Image
-                src={asset("/projects/industrial-air-handling.jpg")}
-                alt="Venkovní vzduchotechnická jednotka u průmyslového objektu"
-                fill
-                unoptimized
-                sizes="(min-width: 1024px) 58vw, 100vw"
-                className="object-cover"
-              />
-              <div className="project-scrim" />
-              <div className="project-caption">
-                <p>Vzduchotechnika</p>
-                <h3>Venkovní VZT jednotka</h3>
-              </div>
-            </article>
-
-            <article className="media group min-h-[420px] lg:col-span-5 reveal" data-delay="100">
-              <Image
-                src={asset("/projects/boiler-room-detail.jpg")}
-                alt="Detail technologické kotelny Buderus"
-                fill
-                unoptimized
-                sizes="(min-width: 1024px) 42vw, 100vw"
-                className="object-cover"
-              />
-              <div className="project-scrim" />
-              <div className="project-caption">
-                <p>Vytápění</p>
-                <h3>Kaskádová kotelna Buderus</h3>
-              </div>
-            </article>
-          </div>
+          <ReferenceHighlights />
         </div>
       </section>
 

@@ -3,42 +3,13 @@ import Link from "next/link";
 import { CTASection } from "@/components/CTASection";
 import { IconArrow, IconCheck } from "@/components/icons";
 import { asset } from "@/lib/paths";
+import { ReferenceGallery } from "@/components/ReferenceContent";
 
 export const metadata = {
   title: "Reference",
   description:
     "Ukázky realizovaných kotelen, průmyslové vzduchotechniky a projektové dokumentace TZB od Proplan Klima.",
 };
-
-const realizations = [
-  {
-    title: "Venkovní VZT jednotka",
-    category: "Vzduchotechnika",
-    description:
-      "Rozsáhlé venkovní řešení vzduchotechniky pro průmyslový objekt. Důraz na funkční vedení tras, servisní přístup a čisté napojení technologie.",
-    image: "/projects/industrial-air-handling.jpg",
-    alt: "Venkovní vzduchotechnická jednotka u průmyslového objektu",
-    size: "wide",
-  },
-  {
-    title: "Kaskádová kotelna Buderus",
-    category: "Vytápění",
-    description:
-      "Kaskádové zapojení kotlů s navazujícími rozvody a regulací. Technické řešení připravené s ohledem na spolehlivost i budoucí servis.",
-    image: "/projects/boiler-room-detail.jpg",
-    alt: "Detail technologické kotelny se třemi kotli Buderus",
-    size: "standard",
-  },
-  {
-    title: "Technická místnost",
-    category: "Zdroj tepla",
-    description:
-      "Kompletní technologie zdroje tepla včetně akumulace, čerpadlových skupin a přehledně vedených rozvodů.",
-    image: "/projects/boiler-room.jpg",
-    alt: "Technická místnost s kotli Buderus, zásobníkem a rozvody",
-    size: "standard",
-  },
-] as const;
 
 const documents = [
   {
@@ -120,37 +91,7 @@ export default function ReferencesPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
-            {realizations.map((project, i) => (
-              <article
-                key={project.title}
-                className={`card overflow-hidden reveal ${project.size === "wide" ? "lg:col-span-2 lg:grid lg:grid-cols-[1.45fr_0.55fr]" : ""}`}
-                data-delay={i * 80}
-              >
-                <div className={`relative overflow-hidden bg-brand-100 ${project.size === "wide" ? "aspect-[16/9] lg:aspect-auto lg:min-h-[480px]" : "aspect-[4/3]"}`}>
-                  <Image
-                    src={asset(project.image)}
-                    alt={project.alt}
-                    fill
-                    unoptimized
-                    sizes={project.size === "wide" ? "(min-width: 1024px) 70vw, 100vw" : "(min-width: 1024px) 50vw, 100vw"}
-                    className="object-cover transition-transform duration-700 hover:scale-[1.025]"
-                  />
-                </div>
-                <div className={`p-7 sm:p-9 ${project.size === "wide" ? "lg:flex lg:flex-col lg:justify-end lg:bg-brand-900 lg:text-white" : ""}`}>
-                  <p className={`text-[0.65rem] uppercase tracking-[0.22em] font-semibold ${project.size === "wide" ? "lg:text-brand-300 text-brand-600" : "text-brand-600"}`}>
-                    {project.category}
-                  </p>
-                  <h3 className={`font-display text-3xl mt-2 ${project.size === "wide" ? "lg:text-white text-brand-900" : "text-brand-900"}`}>
-                    {project.title}
-                  </h3>
-                  <p className={`mt-4 leading-relaxed ${project.size === "wide" ? "lg:text-white/72 text-brand-900/72" : "text-brand-900/72"}`}>
-                    {project.description}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
+          <ReferenceGallery />
         </div>
       </section>
 

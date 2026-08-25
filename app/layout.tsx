@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SiteContentProvider } from "@/components/SiteContentProvider";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -43,10 +44,12 @@ export default function RootLayout({
   return (
     <html lang="cs" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-screen flex flex-col">
-        <ScrollReveal />
-        <Navbar />
-        <main className="flex-1 pt-20">{children}</main>
-        <Footer />
+        <SiteContentProvider>
+          <ScrollReveal />
+          <Navbar />
+          <main className="flex-1 pt-20">{children}</main>
+          <Footer />
+        </SiteContentProvider>
       </body>
     </html>
   );

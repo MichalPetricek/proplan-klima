@@ -30,8 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+# .env je záměrně verzovaný: build na GitHub Pages z něj bere veřejné
+# NEXT_PUBLIC_* proměnné (URL projektu + publishable key).
+# Tajné klíče patří výhradně do .env.local, který se necommituje.
+.env.local
+.env*.local
 
 # vercel
 .vercel

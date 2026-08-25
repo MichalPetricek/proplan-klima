@@ -56,8 +56,23 @@ a rozšířené o detailní popisy služeb v duchu firmy. Kontakty:
 
 ## Formulář
 
-`ContactForm.tsx` je připraven pro připojení k backendu / e-mail službě
-(Resend, Formspree, vlastní API route). Nyní simuluje odeslání.
+Kontaktní formulář odesílá přes EmailJS a ukládá kopii poptávky do Supabase.
+Přesná šablona a nastavení jsou v `docs/emailjs-template.md`.
+
+## Administrace a Supabase
+
+Administrace kontaktů a referencí je dostupná na `/admin`. Databázové tabulky,
+RLS pravidla a Storage bucket vytváří migrace v `supabase/migrations/`.
+Postup prvního zapojení je v `docs/supabase-setup.md`.
+
+```bash
+npm run supabase:check                       # stav tabulek a bucketu
+npm run supabase:admin create vas@email.cz   # založí správce pro /admin
+```
+
+Veřejné proměnné (`NEXT_PUBLIC_SUPABASE_URL`, publishable key) jsou v
+commitnutém `.env` – build na GitHub Pages z něj čte, protože workflow žádné
+secrets nepředává. Secret key patří jen do `.env.local`, který se necommituje.
 
 ## Design
 

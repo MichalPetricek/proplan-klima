@@ -302,6 +302,63 @@ body {
   line-height: 1.08;
 }
 
+/* ===== Admin ===== */
+.admin-panel {
+  background: white;
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.admin-kicker {
+  color: var(--color-brand-600);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.admin-title {
+  color: var(--color-brand-900);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  margin-top: 0.3rem;
+}
+
+.admin-input {
+  width: 100%;
+  margin-top: 0.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  background: white;
+  color: var(--color-brand-900);
+  padding: 0.75rem 0.9rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-input:focus {
+  border-color: var(--color-brand-600);
+  box-shadow: 0 0 0 3px rgba(138, 104, 73, 0.12);
+}
+
+.admin-small-button {
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: white;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-small-button:hover {
+  background: var(--color-brand-50);
+  border-color: var(--color-brand-300);
+}
+
 /* ===== Section divider ===== */
 .divider-leaf {
   display: flex;

@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/paths";
+import { useSiteContent } from "@/components/SiteContentProvider";
 
 export function Footer() {
+  const { contact } = useSiteContent();
+
   return (
     <footer className="bg-paper border-t border-[var(--border)] mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid gap-12 lg:grid-cols-4">
@@ -42,18 +47,17 @@ export function Footer() {
           </h4>
           <ul className="space-y-3 text-brand-900/80">
             <li>
-              <a href="mailto:info@proplan-klima.cz" className="hover:text-brand-900">
-                info@proplan-klima.cz
+              <a href={`mailto:${contact.email}`} className="hover:text-brand-900">
+                {contact.email}
               </a>
             </li>
             <li>
-              <a href="tel:+420737830599" className="hover:text-brand-900">
-                +420 737 830 599
+              <a href={`tel:${contact.phone_href}`} className="hover:text-brand-900">
+                {contact.phone_display}
               </a>
             </li>
-            <li className="text-brand-900/70">
-              Hranická 107<br />
-              753 61 Hranice IV-Drahotuše
+            <li className="text-brand-900/70 whitespace-pre-line">
+              {contact.office_address}
             </li>
           </ul>
         </div>

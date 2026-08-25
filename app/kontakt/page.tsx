@@ -1,5 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
-import { IconMail, IconPhone, IconPin } from "@/components/icons";
+import { ContactDetails } from "@/components/ContactDetails";
 
 export const metadata = {
   title: "Kontakt",
@@ -25,44 +25,7 @@ export default function ContactPage() {
 
       <section className="pb-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[1fr_1.3fr] gap-12">
-          <div className="space-y-4">
-            <ContactCard
-              icon={<IconPhone />}
-              title="Telefon"
-              value="+420 737 830 599"
-              href="tel:+420737830599"
-            />
-            <ContactCard
-              icon={<IconMail />}
-              title="E-mail"
-              value="info@proplan-klima.cz"
-              href="mailto:info@proplan-klima.cz"
-            />
-            <ContactCard
-              icon={<IconPin />}
-              title="Adresa"
-              value={`Hranická 107\n753 61 Hranice IV-Drahotuše`}
-            />
-
-            <div className="card card-flat p-6">
-              <p className="text-xs uppercase tracking-[0.16em] text-brand-700">Otevírací doba</p>
-              <ul className="mt-3 space-y-1.5 text-brand-900/85 text-sm">
-                <li className="flex justify-between"><span>Po - Pá</span><span className="font-medium">7:00 - 15:30</span></li>
-                <li className="flex justify-between text-brand-900/60"><span>So - Ne</span><span>zavřeno</span></li>
-              </ul>
-            </div>
-
-            <div className="card card-flat overflow-hidden">
-              <iframe
-                title="Proplan Klima - mapa"
-                src="https://www.google.com/maps?q=Hranick%C3%A1+107,+753+61+Hranice+IV-Drahotu%C5%A1e&output=embed"
-                className="w-full aspect-[4/3] border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
-            </div>
-          </div>
+          <ContactDetails />
 
           <div className="card card-flat p-8 lg:p-10">
             <p className="eyebrow">Nezávazná poptávka</p>
@@ -77,29 +40,4 @@ export default function ContactPage() {
       </section>
     </>
   );
-}
-
-function ContactCard({
-  icon,
-  title,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  value: string;
-  href?: string;
-}) {
-  const Inner = (
-    <div className="card card-flat p-6 flex items-start gap-4 hover:border-brand-300 transition-colors">
-      <div className="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 grid place-items-center shrink-0">
-        {icon}
-      </div>
-      <div>
-        <p className="text-xs uppercase tracking-[0.16em] text-brand-700">{title}</p>
-        <p className="mt-1 text-brand-900 whitespace-pre-line font-medium">{value}</p>
-      </div>
-    </div>
-  );
-  return href ? <a href={href} className="block">{Inner}</a> : Inner;
 }

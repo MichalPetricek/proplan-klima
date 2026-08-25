@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/paths";
+import { useSiteContent } from "@/components/SiteContentProvider";
 
 const links = [
   { href: "/", label: "Úvod" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { contact } = useSiteContent();
 
   useEffect(() => {
     setOpen(false);
@@ -70,8 +72,8 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+420737830599" className="text-sm text-brand-800 font-medium">
-            +420 737 830 599
+          <a href={`tel:${contact.phone_href}`} className="text-sm text-brand-800 font-medium">
+            {contact.phone_display}
           </a>
           <Link href="/kontakt" className="btn btn-primary text-sm py-2.5 px-5">
             Nezávazná poptávka

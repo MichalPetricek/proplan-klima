@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "supabase:check": "node scripts/supabase-admin.mjs check",
+    "supabase:admin": "node scripts/supabase-admin.mjs"
   },
   "dependencies": {
-    "next": "16.2.6",
+    "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.112.3",
+    "next": "^16.3.2",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

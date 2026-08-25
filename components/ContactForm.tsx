@@ -1,33 +1,98 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
-    // Simulace odeslání (zde lze připojit API endpoint / e-mail službu)
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // Jednoduchý honeypot pro automatizované roboty.
+    if (formData.get("company")) {
       setStatus("sent");
-      (e.target as HTMLFormElement).reset();
-    }, 800);
+      form.reset();
+      return;
+    }
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setErrorMessage(
+        "Formulář ještě není nakonfigurovaný. Napište nám prosím přímo e-mailem.",
+      );
+      setStatus("error");
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const sentAt = form.elements.namedItem("sent_at");
+    if (sentAt instanceof HTMLInputElement) {
+      sentAt.value = new Date().toLocaleString("cs-CZ", {
+        dateStyle: "long",
+        timeStyle: "short",
+      });
+    }
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, form, {
+        publicKey,
+        blockHeadless: true,
+        limitRate: {
+          id: "proplan-contact-form",
+          throttle: 10_000,
+        },
+      });
+
+      const supabase = getSupabaseBrowserClient();
+      if (supabase) {
+        // E-mail je hlavní doručovací kanál. Uložení v Supabase je evidence
+        // pro budoucí inbox v administraci a nesmí blokovat úspěšné odeslání.
+        await supabase.from("contact_submissions").insert({
+          from_name: String(formData.get("from_name") ?? ""),
+          reply_to: String(formData.get("reply_to") ?? ""),
+          phone: String(formData.get("phone") ?? ""),
+          location: String(formData.get("location") ?? ""),
+          service: String(formData.get("service") ?? ""),
+          message: String(formData.get("message") ?? ""),
+        });
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setErrorMessage(
+        "Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo nám napište přímo e-mailem.",
+      );
+      setStatus("error");
+    }
   }
 
   return (
     <form onSubmit={onSubmit} className="mt-8 grid gap-5">
       <div className="grid sm:grid-cols-2 gap-5">
-        <Field label="Jméno a příjmení" name="name" required />
+        <Field label="Jméno a příjmení" name="from_name" required />
         <Field label="Telefon" name="phone" type="tel" />
       </div>
-      <Field label="E-mail" name="email" type="email" required />
+      <Field label="E-mail" name="reply_to" type="email" required />
       <Field label="Lokalita / adresa stavby" name="location" />
       <div>
-        <label className="text-sm text-brand-900 font-medium">O co máte zájem?</label>
+        <label htmlFor="service" className="text-sm text-brand-900 font-medium">
+          O co máte zájem?
+        </label>
         <select
+          id="service"
           name="service"
           className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-brand-900 focus:outline-none focus:border-brand-600"
         >
@@ -39,8 +104,11 @@ export function ContactForm() {
         </select>
       </div>
       <div>
-        <label className="text-sm text-brand-900 font-medium">Zpráva</label>
+        <label htmlFor="message" className="text-sm text-brand-900 font-medium">
+          Zpráva
+        </label>
         <textarea
+          id="message"
           name="message"
           rows={5}
           required
@@ -48,6 +116,12 @@ export function ContactForm() {
           className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-brand-900 focus:outline-none focus:border-brand-600"
         />
       </div>
+
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="company">Firma</label>
+        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+      <input type="hidden" name="sent_at" defaultValue="" />
 
       <label className="flex items-start gap-3 text-sm text-brand-900/80">
         <input type="checkbox" required className="mt-1 accent-[var(--brand-700)]" />
@@ -65,17 +139,16 @@ export function ContactForm() {
         {status === "submitting" ? "Odesílám…" : "Odeslat poptávku"}
       </button>
 
-      {status === "sent" && (
-        <p className="text-brand-700 text-sm">
-          Děkujeme - ozveme se Vám co nejdříve.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="text-red-700 text-sm">
-          Něco se nepovedlo. Zkuste to prosím znovu, nebo napište přímo na
-          info@proplan-klima.cz.
-        </p>
-      )}
+      <p aria-live="polite" className="text-sm min-h-5">
+        {status === "sent" && (
+          <span className="text-brand-700">
+            Děkujeme – zpráva byla odeslána. Ozveme se Vám co nejdříve.
+          </span>
+        )}
+        {status === "error" && (
+          <span className="text-red-700">{errorMessage}</span>
+        )}
+      </p>
     </form>
   );
 }
