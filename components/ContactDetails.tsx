@@ -1,6 +1,6 @@
 "use client";
 
-import { IconMail, IconPhone, IconPin } from "@/components/icons";
+import { IconMail, IconPhone, IconPin, IconShield } from "@/components/icons";
 import { useSiteContent } from "@/components/SiteContentProvider";
 
 export function ContactDetails() {
@@ -24,6 +24,11 @@ export function ContactDetails() {
         icon={<IconPin />}
         title="Kancelář"
         value={contact.office_address}
+      />
+      <ContactCard
+        icon={<IconShield />}
+        title="Sídlo společnosti"
+        value={contact.registered_address}
       />
 
       <div className="card card-flat p-6">
