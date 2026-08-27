@@ -71,8 +71,24 @@ npm run supabase:admin create vas@email.cz   # založí správce pro /admin
 ```
 
 Veřejné proměnné (`NEXT_PUBLIC_SUPABASE_URL`, publishable key) jsou v
-commitnutém `.env` – build na GitHub Pages z něj čte, protože workflow žádné
-secrets nepředává. Secret key patří jen do `.env.local`, který se necommituje.
+commitnutém `.env` – build z něj čte, protože workflow žádné secrets nepředává.
+Secret key patří jen do `.env.local`, který se necommituje.
+
+## Nasazení
+
+Ostrý web běží na Forpsi hostingu (`www.proplan-klima.cz`) jako statický export
+nahraný přes FTP. Postup, zálohu původního WordPressu a poznámku k certifikátu
+popisuje `docs/forpsi-deploy.md`.
+
+```bash
+npm run deploy:check    # ověří FTP připojení
+npm run deploy:backup   # záloha stávajícího obsahu /www
+npm run deploy          # build + nahrání
+```
+
+GitHub Pages zůstává jako náhled – workflow si tam sám nastavuje
+`NEXT_PUBLIC_BASE_PATH=/proplan-klima`. Bez téhle proměnné se web builduje do
+kořene domény, což je varianta pro Forpsi.
 
 ## Design
 

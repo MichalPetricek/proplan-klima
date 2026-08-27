@@ -1,5 +1,4 @@
-export const BASE_PATH =
-  process.env.NODE_ENV === "production" ? "/proplan-klima" : "";
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export function asset(path: string) {
   return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;

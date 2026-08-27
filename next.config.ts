@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
-const repo = "proplan-klima";
+// Prázdný basePath = nasazení do kořene domény (Forpsi, www.proplan-klima.cz).
+// GitHub Pages build si ho nastavuje přes NEXT_PUBLIC_BASE_PATH=/proplan-klima.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isProd ? `/${repo}` : undefined,
-  assetPrefix: isProd ? `/${repo}/` : undefined,
+  basePath: basePath || undefined,
+  assetPrefix: basePath ? `${basePath}/` : undefined,
   trailingSlash: true,
   images: {
     unoptimized: true,

@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "supabase:check": "node scripts/supabase-admin.mjs check",
-    "supabase:admin": "node scripts/supabase-admin.mjs"
+    "supabase:admin": "node scripts/supabase-admin.mjs",
+    "deploy:check": "node scripts/deploy-forpsi.mjs check",
+    "deploy:backup": "node scripts/deploy-forpsi.mjs backup",
+    "deploy": "npm run build && node scripts/deploy-forpsi.mjs deploy"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -21,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "basic-ftp": "^6.2.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

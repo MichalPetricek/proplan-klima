@@ -1,3 +1,5 @@
+import { asset } from "./paths";
+
 export type SiteContact = {
   id: "main";
   company_name: string;
@@ -89,6 +91,5 @@ export const defaultReferences: ReferenceItem[] = [
 
 export function publicImageUrl(url: string) {
   if (/^https?:\/\//.test(url)) return url;
-  const basePath = process.env.NODE_ENV === "production" ? "/proplan-klima" : "";
-  return `${basePath}${url.startsWith("/") ? url : `/${url}`}`;
+  return asset(url);
 }
